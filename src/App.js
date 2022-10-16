@@ -6,10 +6,7 @@ function App() {
   return (
     <>
       <Navbar title="MyFeedback.com" />
-      <div className="my-5 container">
-        <CreatePost title="Write your post here..." />
-        <hr />
-      </div>
+      <CreatePost/>
     </>
   );
 }

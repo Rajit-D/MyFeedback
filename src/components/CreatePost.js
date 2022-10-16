@@ -1,92 +1,72 @@
-import React, { useRef } from 'react'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import ShowPost from "./ShowPost";
 
-export default function CreatePost(props) {
+export default function CreatePost() {
+  const [post, setPost] = useState("");
+  const [feedBack, setFeedBack] = useState([]);
 
-    const addTxt = useRef(null);
-    const posts = useRef(null);
-    const comments =  useRef(null);
+  const handleChange = (e) => {
+    setPost(e.target.value);
+  };
 
-    const handleClick = () => {
-        let post = localStorage.getItem("post");
-        let postObj;
-
-        if (post == null) {
-            postObj = [];
-        }
-        else {
-            postObj = JSON.parse(post);
-        }
-        postObj.push(addTxt.current.value);
-        localStorage.setItem("post", JSON.stringify(postObj));
-        addTxt.current.value = "";
-        console.log(postObj);
-        showPosts();
+  const sendData = () => {
+    let lastId;
+    if(feedBack.slice(-1)[0] === undefined)
+      lastId = 0;
+    else
+      lastId = parseInt(feedBack.slice(-1)[0].id);
+    if (post.length === 0) 
+      alert("cannot be empty");
+    else {
+      const newPost = {
+        postContent: post,
+        comments: [],
+        id: (lastId + 1)
+      };
+      let updatedData = [...feedBack,newPost];
+      setFeedBack(updatedData);
+      axios.post("https://634b9812317dc96a308761f4.mockapi.io/posts", newPost);
+      setPost("");
     }
+  };
 
-    const showPosts = () => {
-        let post = localStorage.getItem("post");
-        let postObj;
+  const getData = async () => {
+    const url = "https://634b9812317dc96a308761f4.mockapi.io/posts";
+    let data = await fetch(url);
+    let parsedData = await data.json();
+    setFeedBack(parsedData);
+  };
 
-        if (post == null) {
-            postObj = [];
-        }
-        else {
-            postObj = JSON.parse(post);
-        }
-        let html = '';
-        postObj.forEach((element, index) => {
-            html += `<div class="my-3 card">
-                        <div class="card-body">
-                            <h5 class="card-title">Post #${index+1}</h5>
-                            <p class="card-text"><strong>${element}</strong></p>
-                            <button id=${index} onClick={deletePost(index)} class="btn btn-danger">Delete Post</button>
-                            <div ref={comments}>
-                                <p class="my-2">Your comments :</p>
-                            </div>
-                            <div class="my-3 form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                                <label for="floatingTextarea">Write a comment</label>
-                            </div>
-                            <button onClick={showcomments} class="btn btn-secondary">Post comment</button>
-                        </div>
-                    </div>`;
-        });
-        if(postObj.length!==0){
-            posts.current.innerHTML = html;
-        }
-        else{
-            posts.current.innerHTML = "No posts created!"
-        }
-    }
+  useEffect(() => {
+    getData();
+  }, []);
 
-    const deletePost = (index) =>{
-        console.log("I am deleting ", index);
 
-        let post = localStorage.getItem("post");
-        let postObj;
+  const deletePost = (id) => {
+    const note = feedBack.filter((e) => e.id !== id);
 
-        if (post == null) {
-            postObj = [];
-        }
-        else {
-            postObj = JSON.parse(post);
-        }
+    axios.delete(`https://634b9812317dc96a308761f4.mockapi.io/posts/${id}`);
+    setFeedBack(note);
+  };
 
-        postObj.splice(index, 1);
-        localStorage.setItem("post", JSON.stringify(postObj));
-        showPosts();
-    }
-
-    return (
-        <>
-            <div className="form-floating">
-                <textarea ref={addTxt} className="form-control" placeholder="Leave a comment here" id="addTxt floatingTextarea2" style={{ height: "100px" }}></textarea>
-                <label htmlFor="floatingTextarea2">{props.title}</label>
-                <button className="btn btn-success my-3" onClick={handleClick}>Create Post</button>
-            </div>
-            <hr />
-            <h1>My posts :</h1>
-            <div ref={posts}></div>
-        </>
-    )
+  return (
+    <div className="form-floating">
+      <textarea
+        className="form-control"
+        placeholder="Leave a comment here"
+        id="addTxt floatingTextarea2"
+        style={{ height: "100px" }}
+        onChange={handleChange}
+        value={post}
+      ></textarea>
+      <label htmlFor="floatingTextarea2">type here</label>
+      <button className="btn btn-success my-3" onClick={sendData}>
+        Create Post
+      </button>
+      {feedBack.map((e,i) => {
+        return <ShowPost key={i} id={e.id} postContent={e.postContent} deletePost={deletePost}/>;
+      })}
+    </div>
+  );
 }
