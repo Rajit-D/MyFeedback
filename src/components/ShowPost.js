@@ -16,7 +16,7 @@ export default function ShowPost(props) {
                 <button className="btn btn-danger" onClick={()=>{props.deletePost(props.id)}}>Delete Post</button>
                 <div>
                     <p className="my-2">Your comments :</p>
-                    {props.showComments.map((e,i)=>{
+                    {props.showComments.map((e,i)=>{       // diplaying all the comments 
                         return <p key={i}>{e}</p>
                     })}
                 </div>

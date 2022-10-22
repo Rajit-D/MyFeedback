@@ -53,18 +53,21 @@ export default function CreatePost() {
     setFeedBack(note);
   };
 
-  const addComments = async (id) => {
-    if (comment.length === 0) alert("cannot be empty");
+  const addComments = async (id) => {       // fumction for posting comments
+    if (comment.length === 0)          // checking if comment is empty
+      alert("cannot be empty");
     const url = `https://634b9812317dc96a308761f4.mockapi.io/posts/${id}`;
     let data = await fetch(url);
     let parsedData = await data.json();
-    const newComment = {
-      postContent: parsedData.postContent,
+    const newComment = {                         // updating the comment object
+      postContent: parsedData.postContent, 
       comments: [...parsedData.comments, comment],
       id: parsedData.id,
     };
+    let index = feedBack.findIndex(e => e.id == id);       // finding the index of the object that has to be updated
+    feedBack[index] = newComment;          // updating the feedBack of that index to newComment
     axios.put(
-      `https://634b9812317dc96a308761f4.mockapi.io/posts/${id}`,
+      `https://634b9812317dc96a308761f4.mockapi.io/posts/${id}`,     // updating the particular object in the api
       newComment
     );
     setComment("");
