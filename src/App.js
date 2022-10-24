@@ -8,7 +8,6 @@ function App() {
       <Navbar title="MyFeedback.com" />
       <div className="my-5 container">
         <CreatePost/>
-
       </div>
     </>
   );

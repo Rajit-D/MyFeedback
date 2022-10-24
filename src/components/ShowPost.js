@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function ShowPost(props) {
-
 
     const handleChange = (e) => {
         props.setComment(e.target.value);
@@ -9,7 +8,6 @@ export default function ShowPost(props) {
 
     const positive= ['good', 'better', 'best'];
     const negative= ['bad', 'worse', 'worst'];
-
 
     return (
         <div className="my-3 card">
@@ -27,7 +25,6 @@ export default function ShowPost(props) {
                 <div className="my-3 form-floating">
                     <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea" onChange={handleChange} value={props.comment}></textarea>
                     <label htmlFor="floatingTextarea">Write a comment</label>
-                </div>
                 <button className="btn btn-secondary" onClick={() => {props.addComments(props.id)}}>Post comment</button>
             </div>
         </div>
