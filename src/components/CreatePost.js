@@ -88,6 +88,7 @@ export default function CreatePost() {
         <button className="btn btn-success my-3" onClick={sendData}>
           Create Post
         </button>
+        <hr />
         {feedBack.map((e, i) => {
           // displaying all the post present in the api
           return (
@@ -107,3 +108,4 @@ export default function CreatePost() {
     </div>
   );
 }
+
