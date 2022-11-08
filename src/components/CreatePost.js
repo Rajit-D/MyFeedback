@@ -64,7 +64,7 @@ export default function CreatePost() {
       comments: [...parsedData.comments, comment],
       id: parsedData.id,
     };
-    let index = feedBack.findIndex(e => e.id == id);       // finding the index of the object that has to be updated
+    let index = feedBack.findIndex(e => parseInt(e.id) === parseInt(id));      // finding the index of the object    that has to  be updated
     feedBack[index] = newComment;          // updating the feedBack of that index to newComment
     axios.put(
       `https://634b9812317dc96a308761f4.mockapi.io/posts/${id}`,     // updating the particular object in the api
