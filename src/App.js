@@ -1,5 +1,6 @@
 import './App.css';
 import CreatePost from './components/CreatePost';
+import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Signuppage from './components/Signuppage';
 
@@ -11,6 +12,7 @@ function App() {
         <CreatePost/>
       </div> */}
       <Signuppage/>
+      {/* <Login/> */}
     </>
   );
 }
