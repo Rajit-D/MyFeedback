@@ -14,8 +14,6 @@ function Navbar(props) {
                             <a className="nav-link" aria-current="page" href="/">Home</a>
                         </li>
                     </ul>
-                    <button type="button" className="btn btn-primary mx-3">Sign Up</button>
-                    <button type="button" className="btn btn-primary">Login</button>
                 </div>
             </div>
         </nav>
