@@ -53,7 +53,7 @@ export default function ShowPost(props) {
             let colour = checkStatement(e);
             return (
               <p key={i}>
-                <mark style={{ background: colour }}>{e}</mark>
+                <mark style={{ background: colour, borderRadius: "5px", padding: "5px" }}>{e}</mark>
               </p>
             );
           })}
