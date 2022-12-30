@@ -47,7 +47,7 @@ function Signuppage() {
             alert("Cannot be Empty");
         }
         else {
-            let flag = false;
+            flag = false;
             for (let i of userCred) {
                 if (i.username === userName) {
                     flag = true;
@@ -56,8 +56,7 @@ function Signuppage() {
                 else
                     flag = false;
             }
-            if (flag === false) 
-            {
+            if (flag === false) {
                 const loginData = {
                     username: userName,
                     password: password,
@@ -79,73 +78,97 @@ function Signuppage() {
     };
 
     return (
-        <div className="container my-3 d-flex justify-content-center flex-column">
-            <form className="row g-3 needs-validation" noValidate>
-                <div className="col-md-4">
-                    <label htmlFor="validationCustom01" className="form-label">
-                        First name
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="validationCustom01"
-                        onChange={getFirstName}
-                        value={firstName}
-                        required
-                    />
-                </div>
-                <div className="col-md-4">
-                    <label htmlFor="validationCustom02" className="form-label">
-                        Last name
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="validationCustom02"
-                        onChange={getLastName}
-                        value={lastName}
-                        required
-                    />
-                </div>
-                <div className="col-md-4">
-                    <label htmlFor="validationCustomUsername" className="form-label">
-                        Username
-                    </label>
-                    <div className="input-group has-validation">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="validationCustomUsername"
-                            onChange={getUserName}
-                            value={userName}
-                            aria-describedby="inputGroupPrepend"
-                            required
-                        />
+        <>
+            <style jsx>
+                {`
+                    body {
+                        background-color: lightblue;
+                    }
+                    input[type="text"], input[type="password"] {
+                        background-color: lightblue;
+                        border: 1px solid black
+                      }
+                `}
+            </style>
+            <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div className="row justify-content-center">
+                    <div className="container col-12 my-5">
+                        <div className="row justify-content-center">
+                            <div className="col-4 my-5 gap-5">
+                                <form className="needs-validation" noValidate>
+                                    <div className="col">
+                                        <label htmlFor="validationCustom01" className="form-label">
+                                            First name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="validationCustom01"
+                                            onChange={getFirstName}
+                                            value={firstName}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="col">
+                                        <label htmlFor="validationCustom02" className="form-label">
+                                            Last name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="validationCustom02"
+                                            onChange={getLastName}
+                                            value={lastName}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="col">
+                                        <label htmlFor="validationCustomUsername" className="form-label">
+                                            Username
+                                        </label>
+                                        <div className="input-group has-validation">
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="validationCustomUsername"
+                                                onChange={getUserName}
+                                                value={userName}
+                                                aria-describedby="inputGroupPrepend"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col">
+                                        <label htmlFor="validationCustom03" className="form-label">
+                                            Password
+                                        </label>
+                                        <input
+                                            type="password"
+                                            className="form-control"
+                                            onChange={getPassword}
+                                            value={password}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="col">
+                                        <button
+                                            className="btn btn-primary mx-auto btn-sm my-3"
+                                            type="submit"
+                                            onClick={setUserData}
+                                        >
+                                            Submit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div className="col-6 mx-4">
+                                <img src="https://blush.design/api/download?shareUri=MdJ1m8DFRYTHAc06&c=Skin_0%7Effeb81-0.1%7Effbf80&w=800&h=800&fm=png" alt="" style={{ height: '500px', width: '620px' }} />
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="col-md-4">
-                    <label htmlFor="validationCustom03" className="form-label">
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        onChange={getPassword}
-                        value={password}
-                        required
-                    />
-                </div>
-                <div className="col-12">
-                    <button
-                        className="btn btn-primary"
-                        type="submit"
-                        onClick={setUserData}
-                    >
-                        Submit form
-                    </button>
-                </div>
-            </form>
-        </div>
+            </div>
+        </>
     );
 }
 
