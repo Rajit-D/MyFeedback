@@ -11,8 +11,8 @@ function App() {
       {/* <div className="my-5 container">
         <CreatePost/>
       </div> */}
-      <Signuppage/>
-      {/* <Login/> */}
+      {/* <Signuppage/> */}
+      <Login/>
     </>
   );
 }
