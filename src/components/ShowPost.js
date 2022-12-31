@@ -32,7 +32,7 @@ export default function ShowPost(props) {
   };
 
   return (
-    <div className="my-3 card">
+    <div className="my-3 card" style={{backgroundColor: '#F4E3B2'}}>
       <div className="card-body">
         <h5 className="card-title">{`Post #${props.id}`}</h5>
         <p className="card-text">
@@ -65,6 +65,9 @@ export default function ShowPost(props) {
             id="floatingTextarea"
             onChange={handleChange}
             value={props.comment}
+            style={{backgroundColor:'#F4E3B2', 
+                    border:'1px solid black'
+                  }}
           ></textarea>
           <label htmlFor="floatingTextarea">Write a comment</label>
           <button

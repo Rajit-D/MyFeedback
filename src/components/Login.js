@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
+import logo from "./logIn.svg";
 
-function Login() {
+function Login(props) {
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -47,41 +48,67 @@ function Login() {
             }
         }
         if(flag){
-            alert("Login successful");
+            props.showAlert("Login successful","success");
             setUserName("");
             setPassword("");
         }
         else{
-            alert("Unsuccessful");
+            props.showAlert("Login unsuccessful","danger");
         }
     }
     return (
         <>
             <style jsx>
                 {`
-                    img{
-                        height: 452px;
-                        width: 599px;
+                    body {
+                        background-color: #F4E3B2;
+                    }
+                    input[type="text"], input[type="password"] {
+                        background-color: #F4E3B2;
+                        border: 1px solid black
+                    }
+                    .animated {
+                        height: 500px;
+                        width: 472px;
+                        position: relative;
+                        animation: moveUpAndDown 2s ease-in-out infinite;
+                    }
+
+                    @keyframes moveUpAndDown {
+                        0% {
+                        top: 0;
+                        }
+                        50% {
+                        top: -30px;
+                        }
+                        100% {
+                        top: 0;
+                        }
+                    }
+                     @media (max-width: 520px){
+                        .animated{
+                           height: 300px
                     }
                 `}
             </style>
-            <div className="container my-5 justify-content-center">
-                <div className="row justify-content-start">
-                    <div className="col-4">
+
+            <div className="container my-5">
+                <div className="row justify-content-between">
+                    <div className="col-lg-5 my-5">
                         <form>
-                            <div className="mb-3">
+                            <div className="col">
                                 <label htmlFor="exampleInputEmail1" className="form-label">User name</label>
                                 <input onChange={getUserName} value={userName} type="text" className="form-control" />
                             </div>
-                            <div className="mb-3">
+                            <div className="col my-2">
                                 <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                                 <input onChange={getPassword} value={password} type="password" className="form-control" />
                             </div>
-                            <button type="submit" onClick={checkCreds} className="btn btn-primary btn-sm">Submit</button>
+                            <button type="submit" onClick={checkCreds} className="btn btn-outline-danger btn-sm mt-4">Submit</button>
                         </form>
                     </div>
-                    <div className="col-6 align-items-center">
-                        <img src="https://blush.design/api/download?shareUri=zXgTGU8plXvw0QYn&c=Skin_0%7Effbf80-0.1%7Effbf80&w=800&h=800&fm=png" alt="" />
+                    <div className="col-lg-5 my-5" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <img src={logo} alt="pic" style={{ height: '400px', width: '410px' }} className="animated" />
                     </div>
                 </div>
             </div>

@@ -80,7 +80,10 @@ export default function CreatePost() {
           className="form-control"
           placeholder="Leave a comment here"
           id="addTxt floatingTextarea2"
-          style={{ height: "100px" }}
+          style={{ height: "100px",
+                  backgroundColor:'#F4E3B2', 
+                  border:'1px solid black' 
+                }}
           onChange={handleChange}
           value={post}
         ></textarea>
