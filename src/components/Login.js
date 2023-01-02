@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import logo from "./logIn.svg";
+import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
+
+    const navigate = useNavigate();
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -51,6 +54,10 @@ function Login(props) {
             props.showAlert("Login successful","success");
             setUserName("");
             setPassword("");
+            props.isLogged(true);
+            localStorage.setItem("username",userName);
+            localStorage.setItem("isLogged",true);
+            navigate("/");
         }
         else{
             props.showAlert("Login unsuccessful","danger");

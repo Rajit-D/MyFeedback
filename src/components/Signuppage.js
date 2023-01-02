@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import logo from "./signIn.svg";
+import { useNavigate } from "react-router-dom";
 
 function Signuppage(props) {
+
+    const navigate = useNavigate();
+
     const [userCred, setUserCred] = useState([]);
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -72,6 +76,10 @@ function Signuppage(props) {
                 setLastName("");
                 setUserName("");
                 setPassword("");
+                props.isLogged(true);
+                localStorage.setItem("username",userName);
+                localStorage.setItem("isLogged",true);
+                navigate("/");
             }
             else
             props.showAlert("Usernam already exists","danger");
